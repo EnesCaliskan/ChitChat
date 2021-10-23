@@ -22,6 +22,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
         keyboardType: TextInputType.emailAddress,
         style: TextStyle(color: kBubbleBlue),
         onChanged: (text){
+          emailProvider.setEmail(text);
           setState(() {
             _emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(text);
             emailProvider.setEmail(text);

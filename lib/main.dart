@@ -3,6 +3,7 @@ import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/login_page.dart';
 import 'package:chat_app/screens/register_screen.dart';
 import 'package:chat_app/screens/welcome_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,16 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    Firebase.initializeApp().whenComplete((){
+      print('completed');
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

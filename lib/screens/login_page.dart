@@ -6,7 +6,7 @@ import 'package:chat_app/widgets/register_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/constants.dart';
 import 'package:provider/provider.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -37,28 +38,30 @@ class _LoginScreenState extends State<LoginScreen> {
           PasswordTextField(),
           RegisterLoginButton(
               buttonText: 'Login',
-              buttonFunction: (){
+              buttonFunction: () async {
+                  try{
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: loginProvider.email,
+                        password: loginProvider.password);
 
-                if(loginProvider.emailValid && loginProvider.passwordValid){
-                  //login bilgilerini al
-
-
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Text('Login Successful'),
-                     ),
-                   );
-                  Navigator.pushNamed(context, ChatScreen.id);
-                  } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Colors.redAccent,
-                      content: Text('Invalid email or password'),
-                    ),
-                  );
-                  }
+                    if(user != null){
+                      Navigator.pushNamed(context, ChatScreen.id);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Text('Login Successful'),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    }
+                  } on FirebaseAuthException catch(e){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.redAccent,
+                        content: Text('${e.message}'),
+                       ),
+                      );
+                    }
                 },
               buttonColor: kCoralPink,
               textColor: kBubbleBlue),

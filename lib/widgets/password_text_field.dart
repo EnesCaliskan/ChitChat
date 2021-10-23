@@ -29,6 +29,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     var passwordProvider = Provider.of<LoginProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.only(left:40.0, right: 40.0, top: 10.0, bottom: 30.0),
       child: TextField(
@@ -36,6 +37,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         style: TextStyle(color: kBubbleBlue),
         controller: passwordTextController,
         onChanged: (text){
+          passwordProvider.setPassword(text);
           setState(() {
             _passwordValid = RegExp(r'(^(?:[+0]9)?[0-9]{6,12}$)').hasMatch(text);
             passwordProvider.setPasswordValid(_passwordValid);
