@@ -1,0 +1,35 @@
+name: chat_app
+description: A new Flutter application.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.15.0-116.0.dev <3.0.0"
+
+dependencies:
+  animated_text_kit: ^4.2.1
+  provider: ^6.0.1
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+
+flutter:
+  fonts:
+    - family: Helvetica
+      fonts:
+        - asset: assets\fonts\Helvetica.ttf
+        - asset: assets\fonts\Helvetica-Bold.ttf
+          weight: 700
+        - asset: assets\fonts\helvetica-light-587ebe5a59211.ttf
+          style: italic
+
+  uses-material-design: true
+  assets:
+    - assets/images/
