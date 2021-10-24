@@ -26,7 +26,6 @@ class _EmailTextFieldState extends State<EmailTextField> {
           setState(() {
             _emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(text);
             emailProvider.setEmail(text);
-            emailProvider.setEmailValid(_emailValid);
           });
         },
         decoration: InputDecoration(

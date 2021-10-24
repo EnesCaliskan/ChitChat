@@ -1,8 +1,13 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/screens/welcome_screen.dart';
+import 'package:chat_app/widgets/ChatScreenWidgets/dropdown_menu.dart';
+import 'package:chat_app/widgets/ChatScreenWidgets/messages_stream.dart';
+import 'package:chat_app/widgets/ChatScreenWidgets/text_field_decoration.dart';
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final _fireStore = FirebaseFirestore.instance;
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
@@ -15,6 +20,9 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
+  final messageTextController = TextEditingController();
+
+  late String messageText;
 
   @override
   void initState() {
@@ -32,8 +40,6 @@ class _ChatScreenState extends State<ChatScreen> {
     } catch(e){
       print(e);
     }
-
-
   }
 
   @override
@@ -60,12 +66,13 @@ class _ChatScreenState extends State<ChatScreen> {
                     color: kCoralPink,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Logout', style: TextStyle(color: kBubbleBlue, fontSize: 16.0),),
+                        padding: const EdgeInsets.all(1.0),
+                        child: BuildDropDownMenu(),
                       ),
+                      /*
                       IconButton(
                         icon: Icon(Icons.logout, color: kBubbleBlue,),
                         onPressed: (){
@@ -73,15 +80,60 @@ class _ChatScreenState extends State<ChatScreen> {
                             Navigator.popAndPushNamed(context, WelcomeScreen.id);
                         },
                       ),
+                       */
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          TextField(),
+          MessagesStream(
+            createdAt: Timestamp.now(),
+            loggedInUser: loggedInUser,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextField(
+              onChanged: (value){
+                messageText = value;
+              },
+              controller: messageTextController,
+              style: TextStyle(color: kBubbleBlue, fontSize: 16.0),
+              keyboardType: TextInputType.multiline,
+              minLines: 1,
+              maxLines: 6,
+              decoration: InputDecoration(
+                enabledBorder: buildOutlineInputBorder(),
+                focusedBorder: buildOutlineInputBorder(),
+                prefixIcon: IconButton(
+                  icon: Icon(Icons.emoji_emotions, color: kCoralPink,),
+                  onPressed: (){
+                    //emoji
+                  },
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.send, color: kCoralPink,),
+                  onPressed: (){
+                      messageTextController.clear();
+                      _fireStore.collection('messages').add({
+                          'text': messageText,
+                          'sender': loggedInUser.email,
+                          'time' : Timestamp.now(),
+                        });
+                  }),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
+
+
 }
+
+
+
+
+
+

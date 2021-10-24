@@ -9,14 +9,19 @@ class MainImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'logo',
-      child: Container(
-        height: imageHeight,
-        width: imageWidth,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/bubble.png'),
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: Hero(
+          tag: 'logo',
+          child: Container(
+            height: imageHeight,
+            width: imageWidth,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/bubble.png'),
+              ),
+            ),
           ),
         ),
       ),

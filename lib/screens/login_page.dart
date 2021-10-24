@@ -24,12 +24,22 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var loginProvider = Provider.of<LoginProvider>(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: kNavy,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 25.0, left: 15.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(icon: Icon(Icons.arrow_back_ios, color: kCoralPink,),
+              onPressed: (){
+                Navigator.pop(context);
+              },),
+            ),
+          ),
           MainImage(
             imageHeight: MediaQuery.of(context).size.height / 2.5,
             imageWidth: MediaQuery.of(context).size.width / 2,

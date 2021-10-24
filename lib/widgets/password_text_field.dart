@@ -33,20 +33,19 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     return Padding(
       padding: const EdgeInsets.only(left:40.0, right: 40.0, top: 10.0, bottom: 30.0),
       child: TextField(
-        keyboardType: TextInputType.number,
         style: TextStyle(color: kBubbleBlue),
         controller: passwordTextController,
         onChanged: (text){
           passwordProvider.setPassword(text);
           setState(() {
-            _passwordValid = RegExp(r'(^(?:[+0]9)?[0-9]{6,12}$)').hasMatch(text);
-            passwordProvider.setPasswordValid(_passwordValid);
+            _passwordValid = RegExp(r'^((?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%&*]{6,20})$').hasMatch(text);
             passwordProvider.setPassword(text);
           });
         },
         obscureText: _isObscure,
         decoration: InputDecoration(
-            helperText: _passwordValid ? '' : 'Password must only contain numbers',
+            helperText: _passwordValid ? '' : 'Password must be at least 6 characters long and must contain number',
+            helperMaxLines: 2,
             helperStyle: TextStyle(color: kCoralPink),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
