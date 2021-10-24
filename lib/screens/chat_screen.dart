@@ -1,5 +1,4 @@
 import 'package:chat_app/constants.dart';
-import 'package:chat_app/screens/welcome_screen.dart';
 import 'package:chat_app/widgets/ChatScreenWidgets/dropdown_menu.dart';
 import 'package:chat_app/widgets/ChatScreenWidgets/messages_stream.dart';
 import 'package:chat_app/widgets/ChatScreenWidgets/text_field_decoration.dart';
@@ -65,24 +64,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     borderRadius: BorderRadius.circular(10.0),
                     color: kCoralPink,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(1.0),
-                        child: BuildDropDownMenu(),
-                      ),
-                      /*
-                      IconButton(
-                        icon: Icon(Icons.logout, color: kBubbleBlue,),
-                        onPressed: (){
-                            _auth.signOut();
-                            Navigator.popAndPushNamed(context, WelcomeScreen.id);
-                        },
-                      ),
-                       */
-                    ],
-                  ),
+                  child: BuildDropDownMenu(),
                 ),
               ],
             ),
@@ -106,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 enabledBorder: buildOutlineInputBorder(),
                 focusedBorder: buildOutlineInputBorder(),
                 prefixIcon: IconButton(
-                  icon: Icon(Icons.emoji_emotions, color: kCoralPink,),
+                  icon: Icon(Icons.emoji_emotions, color: kCoralPink),
                   onPressed: (){
                     //emoji
                   },

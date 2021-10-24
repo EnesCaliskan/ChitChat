@@ -33,7 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
     });
 
     //animation tween
-    animation = ColorTween(begin: kBubblePink, end: kBubbleNeon).animate(controller);
+    animation = ColorTween(begin: kBubbleNeon, end: kBubbleBlue).animate(controller);
     animation.addStatusListener((status) {
       if(status == AnimationStatus.completed){
         controller.reverse();
