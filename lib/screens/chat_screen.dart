@@ -56,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   height: 60.0,
-                  width: 380.0,
+                  width: 360.0,
                   child: FlowMenu(),
                 ),
               ),
