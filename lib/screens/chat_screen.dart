@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/widgets/ChatScreenWidgets/chat_menu_flow.dart';
 import 'package:chat_app/widgets/ChatScreenWidgets/dropdown_menu.dart';
 import 'package:chat_app/widgets/ChatScreenWidgets/messages_stream.dart';
 import 'package:chat_app/widgets/ChatScreenWidgets/text_field_decoration.dart';
@@ -48,26 +49,18 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0, left: 10.0, right: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: kCoralPink,),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  height: 60.0,
+                  width: 380.0,
+                  child: FlowMenu(),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: kCoralPink,
-                  ),
-                  child: BuildDropDownMenu(),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           MessagesStream(
             createdAt: Timestamp.now(),
