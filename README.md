@@ -1,16 +1,10 @@
-# chat_app
+# Chit Chat 
 
-A new Flutter application.
+Chit Chat is a chat application that uses the power of Firebase. User can choose to register with new email or login with existing account. For authorization, i used Firebase Authorization. After that user can start chatting freely with already logged in users. For styling, i used animated_text_kit package and other animations are made by myself.
 
-## Getting Started
+## Screen Capture
 
-This project is a starting point for a Flutter application.
+https://user-images.githubusercontent.com/24297535/139079462-ce6c6666-a9c4-4eba-a0bf-0cbb0709c882.mp4
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
